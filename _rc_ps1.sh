@@ -17,14 +17,24 @@ o222=222
 o221=221
 o220=220
 
+function isMac {
+	return $(test "$(uname)" = "Darwin")
+}
+
 lighters=(177 176 175 174 173 172 178 179 180 181 182 45)
+finish="\[\033[0m\]"
+template="\[\033[38;5;HEREm\]"
+
+if isMac; then
+	lighters=("red" "purple" "blue")
+	finish="%f"
+	template="%F{HERE}"
+fi
 
 
 pack=($red $blue $pink3)
 pack_oranges=($o225 $o224 $o223 $o222 $o221 $o220 $red)
 
-finish="\[\033[0m\]"
-template="\[\033[38;5;HEREm\]"
 
 fillTemplate()
 {
@@ -43,9 +53,9 @@ generateFromPack()
 }
 
 lion="\xF0\x9F\xA6\x81"
-#teddybear="@"
-#teddybear="\xF0\x9F\xA7\xB8"
-teddybear="\360\237\247\270"
+#pepposo="@"
+#pepposo="\xF0\x9F\xA7\xB8"
+pepposo="\360\237\247\270"
 dollar="\xF0\x9F\x92\xB2"
 dollar="\360\237\222\262"
 #home="~"
@@ -118,16 +128,26 @@ function replacePWD
 	echoNonEscaped "$finish"
 }
 
+
 function reloadPrompt
 {
 	colors=$(generateFromPack ${lighters[@]})
 	pwd=$(replacePWD $colors)
 
+	user="\u"
+	machine="\u"
+	if isMac; then
+		user="%n"
+		machine="%m"
+		PS1="$user@$machine %~  %# "
+		return
+	fi
+
 	if [ "$USER" = "root" ]
 	then	
-		PS1="$(fillTemplate 88)\u${finish}$(echoNonEscaped $horse)${pwd}\\$ "
+		PS1="$(fillTemplate 88)$user${finish}$(echoNonEscaped $horse)${pwd}\\$ "
 	else
-		PS1="$(fillTemplate 147)\u${finish}$(echoNonEscaped $teddybear)${pwd}$(echoNonEscaped $dollar) "
+		PS1="$(fillTemplate 147)$user${finish}$(echoNonEscaped $pepposo)${pwd}$(echoNonEscaped $dollar) "
 	fi
 }
 
