@@ -139,7 +139,7 @@ function reloadPrompt
 	if isMac; then
 		user="%n"
 		machine="%m"
-		PS1="$user@$machine %~  %# "
+		PS1="$user@$machine %~ %# "
 		return
 	fi
 
