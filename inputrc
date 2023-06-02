@@ -1,0 +1,17 @@
+
+$include /etc/inputrc
+
+set colored-completion-prefix on
+
+"\e[1;5A":" pushd +1 &> /dev/null\n"
+"\e[1;5B":" dirs -l -v -p\n"
+"\e[1;6A":" pushd . &> /dev/null\n"
+"\e[1;6B":" popd &> /dev/null\n"
+"\ef":"\C-Afind . -iregex \".*\C-E.*\""
+"\eg":"\C-Agrep -ri \"\C-E\" src/"
+"\el":" .glog ; .gstatus\x0D"
+
+# vim:filetype=readline
+
+
+

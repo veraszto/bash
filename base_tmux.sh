@@ -9,10 +9,12 @@ base='tmux -S $MY_TMUX_SOCKET'
 selectLayoutTiled="select-layout tiled"
 if test $hasSession -gt 0; then
 	andThen='-f $MY_TMUX_CONF new-session -s '"$sessionName"' -t '"$sessionGroup"' \; '\
-'splitw "man bash" \; select-layout even-horizontal \; '\
-'new-window \; splitw \; splitw "journalctl --follow" \; splitw "TERM=xterm-256color htop" \; select-layout tiled \; '\
-'new-window "vim" \; splitw -h \; '\
-'new-window \; splitw -h' 
+'splitw \; splitw "journalctl --follow" \; '\
+'splitw "TERM=xterm-256color htop" \; select-layout tiled \; '\
+'new-window "vim" \; '\
+'new-window "vim" \; '\
+'new-window \; '\
+'select-window -t 0'
 	built="$base $andThen"
 else
 	andThen='new-session -t '"$sessionGroup"
