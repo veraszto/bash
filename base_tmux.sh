@@ -1,5 +1,5 @@
 #!/bin/bash
-source $HOME/git/my-bash/my_custom_bashrc.sh
+source $HOME/git/bash/my-custom-bashrc.sh
 unset GNOME_TERMINAL_SCREEN
 sessionName=myTmuxSession
 sessionGroup=myTmuxGroup
