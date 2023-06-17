@@ -1,4 +1,5 @@
 #!/bin/bash
+export PULL_MY_NON_PUBLIC_SCRIPT="$HOME/git/my-bash/my-custom-bashrc.sh"
 source $HOME/git/bash/my-custom-bashrc.sh
 unset GNOME_TERMINAL_SCREEN
 sessionName=myTmuxSession

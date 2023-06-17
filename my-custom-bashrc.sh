@@ -1,15 +1,5 @@
 #!/bin/bash
 
-if test $(echo $SHELL | grep -i bash &> /dev/null ; echo $?) -eq 0; then
-	HISTSIZE=-1
-	HISTFILESIZE=-1
-	HISTCONTROL=ignoreboth
-elif test $(echo -n "$SHELL" | grep -i zsh); then
-	bindkey -s "\el" ".glog ; .gstatus\r"
-	bindkey -s "\eg" "\C-Agrep -ri \"\C-E\" src/"
-	bindkey -s "\ef" "\C-Afind . -iregex \".*\C-E.*\""
-fi
-
 export MY_DANVIM_DIR=$HOME/git/danvim
 export MY_PUBLIC_BASH_DIR="$HOME/git/bash"
 export MY_GIT_HOME=$HOME/git
@@ -42,6 +32,9 @@ export MY_TMUX_SOCKET_TOOLBOX="$HOME/TMUX.SOCKET.TOOLBOX"
 export MY_TMUX_CONF="$MY_GRACEFUL_GNU/tmux/default.conf"
 export MY_TMUX_CONF_BASH_CONTEXT="$MY_GRACEFUL_GNU/tmux/bash.context.conf"
 
+
+export EDITOR="vim -u /etc/vim/vimrc"
+
 if command -v shopt &> /dev/null; then
 	shopt -s autocd
 elif command -v setopt &> /dev/null; then
@@ -58,4 +51,3 @@ test -r "$PULL_MY_NON_PUBLIC_SCRIPT" && source "$PULL_MY_NON_PUBLIC_SCRIPT"
 if [ -n "$(echo $- | grep -io 'i')" ]; then
 	echo "Hello how are you?"
 fi 
-
