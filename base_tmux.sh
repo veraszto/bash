@@ -8,10 +8,14 @@ tmux -S $MY_TMUX_SOCKET has-session -t $sessionName &> /dev/null
 hasSession=$?
 base='tmux -S $MY_TMUX_SOCKET'
 selectLayoutTiled="select-layout tiled"
+splitw="splitw -l5 \; select-pane -t -1"
 if test $hasSession -gt 0; then
 	andThen='-f $MY_TMUX_CONF new-session -s '"$sessionName"' -t '"$sessionGroup"' \; '\
-'splitw \; splitw "journalctl --follow" \; '\
+"$splitw"' \; '"$splitw"' \; '"$splitw"' \; splitw "journalctl --follow" \; '\
+'swap-pane -t4 \; '\
 'splitw "TERM=xterm-256color htop" \; select-layout tiled \; '\
+'swap-pane -t5 \; '\
+'select-pane -t0 \; '\
 'new-window "vim" \; '\
 'new-window "vim" \; '\
 'new-window \; '\
