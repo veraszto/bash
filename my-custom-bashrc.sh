@@ -1,9 +1,9 @@
 #!/bin/bash
 
-export MY_DANVIM_DIR=$HOME/git/danvim
-export MY_PUBLIC_BASH_DIR="$HOME/git/bash"
 export MY_GIT_HOME=$HOME/git
-export MY_GRACEFUL_GNU=$HOME/git/graceful-gnu
+export MY_DANVIM_DIR=$MY_GIT_HOME/danvim
+export MY_PUBLIC_BASH_DIR="$MY_GIT_HOME/bash"
+export MY_GRACEFUL_GNU=$MY_GIT_HOME/graceful-gnu
 export MY_GNOME_TERMINAL_PROJECTS_LAUNCHER_INITIALIZATOR="gnome-terminal --maximize --full-screen"
 
 if test -n "$(echo -n $XDG_SESSION_DESKTOP | grep -i xorg)"; then
@@ -15,6 +15,14 @@ elif test "$(uname)" = "Darwin"; then
 else
 	export MY_CLIPBOARD_MANAGER_IN="wl-copy"
 	export MY_CLIPBOARD_MANAGER_OUT="wl-paste"
+fi
+if test $(echo $SHELL | grep -i bash &> /dev/null ; echo $?) -eq 0; then
+	HISTSIZE=-1
+	HISTFILESIZE=-1
+	HISTCONTROL=ignoreboth
+elif test $(echo -n "$SHELL" | grep -i zsh); then
+	HISTSIZE=1000
+	SAVEHIST=1000
 fi
 
 export MY_TMP_BRIDGE="$HOME/tmp/bridge"
@@ -32,9 +40,6 @@ export MY_TMUX_SOCKET_TOOLBOX="$HOME/TMUX.SOCKET.TOOLBOX"
 export MY_TMUX_CONF="$MY_GRACEFUL_GNU/tmux/default.conf"
 export MY_TMUX_CONF_BASH_CONTEXT="$MY_GRACEFUL_GNU/tmux/bash.context.conf"
 
-
-export EDITOR="vim -u /etc/vim/vimrc"
-
 if command -v shopt &> /dev/null; then
 	shopt -s autocd
 elif command -v setopt &> /dev/null; then
@@ -50,4 +55,5 @@ test -r "$PULL_MY_NON_PUBLIC_SCRIPT" && source "$PULL_MY_NON_PUBLIC_SCRIPT"
 
 if [ -n "$(echo $- | grep -io 'i')" ]; then
 	echo "Hello how are you?"
+	echo "We have $(wc -l $HISTFILE | grep -o "[0-9]\+") lines of history"
 fi 
