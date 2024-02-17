@@ -31,17 +31,20 @@ reports='"journalctl --follow" \; splitw "TERM=xterm-256color htop" \; select-la
 #echo $built
 
 geometry="270x70"
-gnome-terminal --full-screen -- /bin/bash -c "$basic $reports"
-gnome-terminal --title "Bash" --geometry=$geometry -- /bin/bash -c "$basic"
+maximize="--maximize"
+fullScreen="--full-screen"
+gnome-terminal $fullScreen -- /bin/bash -c "$basic -s 'Reports' $reports"
+gnome-terminal --title "Bash" $fullScreen -- /bin/bash -c "$basic -s Bash"
 
 
-gnome-terminal --title "Vim" --geometry=$geometry -- /bin/bash -c "$basic \
-vim \"+cd $HOME\" \"+source $MY_DANVIM_DIR/basic_loader.vim\" \; \
-new-window vim \"+cd $MY_DANVIM_DIR\" \"+source $MY_DANVIM_DIR/basic_loader.vim\""
+gnome-terminal --title "Vim" $fullScreen -- /bin/bash -c "$basic -s Vim \
+vim \"+cd $HOME\" \"+call g:danvim.modules.state_manager.InflateState()\" \; \
+new-window vim \"+cd $MY_DANVIM_DIR\" \"+call g:danvim.modules.state_manager.InflateState()\""
 
 
-gnome-terminal --title "Cloud Virtual Machine" --geometry=$geometry
-gnome-terminal --title "Launcher"
+gnome-terminal --title "Cloud Virtual Machine" $fullScreen
+gnome-terminal --title "Manuals/Readings" $fullScreen -- /bin/bash -c "$basic -s 'Manuals/Readings'"
+gnome-terminal --title "Launcher" $maximize
 
 #tmuxInside="$MY_VIM_LOADERS_DIR_BASE/tmux.inside.vim"
 #gnomeProject="$MY_PUBLIC_BASH_DIR/build_workspace_file_from_dir.sh && gnome-terminal --full-screen -- vim -S $tmuxInside"
