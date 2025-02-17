@@ -9,7 +9,7 @@ unset GNOME_TERMINAL_SCREEN
 #selectLayoutTiled="select-layout tiled"
 #splitw="splitw -l5 \; select-pane -t -1"
 
-basic='tmux -S $MY_TMUX_SOCKET -f $MY_TMUX_CONF new-session'
+basic='echo "Inflating gnome-terminal..." ; sleep 5 ; tmux -S $MY_TMUX_SOCKET -f $MY_TMUX_CONF new-session'
 reports='"journalctl --follow" \; splitw "TERM=xterm-256color htop" \; select-layout even-horizontal'
 
 #if test $hasSession -gt 0; then
@@ -30,19 +30,16 @@ reports='"journalctl --follow" \; splitw "TERM=xterm-256color htop" \; select-la
 #fi
 #echo $built
 
-geometry="270x70"
+#geometry="270x70"
 maximize="--maximize"
 fullScreen="--full-screen"
+
 gnome-terminal $fullScreen -- /bin/bash -c "$basic -s 'Reports' $reports"
-gnome-terminal --title "Bash" $fullScreen -- /bin/bash -c "$basic -s Bash"
-
-
 gnome-terminal --title "Vim" $fullScreen -- /bin/bash -c "$basic -s Vim \
 vim \"+cd $HOME\" \"+call g:danvim.modules.state_manager.InflateState()\" \; \
 new-window vim \"+cd $MY_DANVIM_DIR\" \"+call g:danvim.modules.state_manager.InflateState()\""
-
-
-gnome-terminal --title "Cloud Virtual Machine" $fullScreen
+gnome-terminal --title "Bash" $fullScreen -- /bin/bash -c "$basic -s Bash"
+#gnome-terminal --title "Cloud Virtual Machine" $fullScreen
 gnome-terminal --title "Manuals/Readings" $fullScreen -- /bin/bash -c "$basic -s 'Manuals/Readings'"
 gnome-terminal --title "Launcher" $maximize
 
