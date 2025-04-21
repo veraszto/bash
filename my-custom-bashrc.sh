@@ -6,6 +6,18 @@ export MY_PUBLIC_BASH_DIR="$MY_GIT_HOME/bash"
 export MY_GRACEFUL_GNU=$MY_GIT_HOME/graceful-gnu
 export MY_GNOME_TERMINAL_PROJECTS_LAUNCHER_INITIALIZATOR="gnome-terminal --maximize --full-screen"
 
+export SDB="/dev/sdb"
+export SDC="/dev/sdc"
+export SDD="/dev/sdd"
+counter=1
+while test $counter -lt 5
+do
+	export "SDB$counter"="/dev/sdb$counter"
+	export "SDC$counter"="/dev/sdc$counter"
+	export "SDD$counter"="/dev/sdd$counter"
+	((counter++))
+done
+
 if test -n "$(echo -n $XDG_SESSION_DESKTOP | grep -i xorg)"; then
 	export MY_CLIPBOARD_MANAGER_IN="xclip -in -selection CLIPBOARD"
 	export MY_CLIPBOARD_MANAGER_OUT="xclip -out -selection CLIPBOARD"
@@ -44,7 +56,7 @@ export MY_TMUX_SOCKET="$HOME/TMUX.SOCKET"
 #export MY_TMUX_SOCKET_TOOLBOX="$HOME/TMUX.SOCKET.TOOLBOX"
 export MY_TMUX_CONF="$MY_GRACEFUL_GNU/tmux/default.conf"
 #export MY_TMUX_CONF_BASH_CONTEXT="$MY_GRACEFUL_GNU/tmux/bash.context.conf"
-export EDITOR="vim -u /etc/vim/vimrc"
+export EDITOR="vim"
 
 if command -v shopt &> /dev/null; then
 	shopt -s autocd

@@ -88,11 +88,11 @@ function replacePWD
 	noHome="${PWD/${HOME}/}"
 #	echo $pwd 1>&2
 #	echo $nohome 1>&2
-	if [ ${#PWD} -gt ${#noHome} ]
+	if [ "${#PWD}" -gt "${#noHome}" ]
 	then
 		pwd=${noHome}
 		echoNonEscaped ${home}
-	elif [ $HOME = $PWD ]
+	elif [ "$HOME" = "$PWD" ]
 	then
 		echoNonEscaped ${home}
 		return
@@ -128,10 +128,10 @@ function replacePWD
 	echoNonEscaped "$finish"
 }
 
+colors=$(generateFromPack ${lighters[@]})
 
 function reloadPrompt
 {
-	colors=$(generateFromPack ${lighters[@]})
 	pwd=$(replacePWD $colors)
 
 	user="\u"
