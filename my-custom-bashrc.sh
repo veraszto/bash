@@ -58,6 +58,8 @@ export MY_TMUX_CONF="$MY_GRACEFUL_GNU/tmux/default.conf"
 #export MY_TMUX_CONF_BASH_CONTEXT="$MY_GRACEFUL_GNU/tmux/bash.context.conf"
 export EDITOR="vim"
 
+LS_COLORS=$LS_COLORS:'di=0;92'
+
 if command -v shopt &> /dev/null; then
 	shopt -s autocd
 elif command -v setopt &> /dev/null; then
