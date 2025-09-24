@@ -1,7 +1,7 @@
 #!/bin/bash 
 dir=${1:-$PWD}
 name=$(echo $dir | sed -e 's/\//./g' -e 's/^.//')
-homeDanVimWorkspaces=".danvim/workspaces"
+homeDanVimWorkspaces=".danvim/workspaces/app-data"
 if test -n "${MY_VIM_WORKSPACES}"; then
 	workspaceFile=${MY_VIM_WORKSPACES}/$name.workspaces
 else

@@ -29,9 +29,8 @@ else
 	export MY_CLIPBOARD_MANAGER_OUT="wl-paste"
 fi
 
-export DANVIM_CLIPBOARD_MANAGER_COPY=$MY_CLIPBOARD_MANAGER_IN
-export DANVIM_CLIPBOARD_MANAGER_PASTE=$MY_CLIPBOARD_MANAGER_OUT
-
+#This suffices
+#if test $(echo $SHELL | grep bash); then
 if test $(echo $SHELL | grep -i bash &> /dev/null ; echo $?) -eq 0; then
 	HISTSIZE=-1
 	HISTFILESIZE=-1
@@ -44,11 +43,10 @@ fi
 export MY_TMP_BRIDGE="$HOME/tmp/bridge"
 export MY_VIM_ADDITIONAL_RUNTIME_DIR="$MY_GRACEFUL_GNU/vim/additional.runtime"
 export MY_VIM_INITIAL_DIR="~/git"
-export DANVIM_INITIAL_DIR=$MY_VIM_INITIAL_DIR
 export MY_VIM_OVERLAY_NAVIGATOR_OFF=1
 
 export MY_TMUX_SESSION="Main"
-export MY_TMUX_TOOLBOX_SESSION="Toolbox"
+#export MY_TMUX_TOOLBOX_SESSION="Toolbox"
 export MY_TMUX_SOCKET="$HOME/TMUX.SOCKET"
 #export MY_TMUX_SOCKET_TOOLBOX="$HOME/TMUX.SOCKET.TOOLBOX"
 #export MY_TMUX_SOCKET_BASH_CONTEXT="$HOME/TMUX.SOCKET.BASHCONTEXT"
@@ -66,12 +64,20 @@ elif command -v setopt &> /dev/null; then
 	setopt autocd
 fi
 
-for s in $(find $MY_PUBLIC_BASH_DIR -regex ".*_rc_.*")
+for s in $(find $MY_PUBLIC_BASH_DIR -type f -regex ".*_rc_.*" | sort)
 do
 	test -r "$s" && source "$s"
 done
 
 test -r "$PULL_MY_NON_PUBLIC_SCRIPT" && source "$PULL_MY_NON_PUBLIC_SCRIPT"
+
+MANUAL_RCS=("$MY_PUBLIC_BASH_DIR/_rc-manual_danvim-env-vars.sh")
+for manualRc in ${MANUAL_RCS[@]}
+do
+	if test -r "${manualRc}" ; then
+		source $manualRc
+	fi
+done
 
 if [ -n "$(echo $- | grep -io 'i')" ]; then
 	echo "Hello how are you?"
