@@ -41,4 +41,6 @@ alias grep="grep --color"
 alias .grace="$MY_GIT_HOME/graceful-gnu"
 alias .danvim="$MY_GIT_HOME/danvim"
 
-alias .aliases="alias | grep -i \"alias\s*\.[a-z0-9]\+\|#\{5,\}\""
+alias .aliases='alias | grep -i "alias\s*\.[a-z0-9]\+\|#\{5,\}"'
+
+alias .ipfs="~/Downloads/ipfs/kubo/ipfs"

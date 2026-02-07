@@ -41,7 +41,7 @@ new-window vim \"+cd $MY_DANVIM_DIR\" \"+call g:danvim.modules.state_manager.Inf
 gnome-terminal --title "Bash" $fullScreen -- /bin/bash -c "$basic -s Bash"
 #gnome-terminal --title "Cloud Virtual Machine" $fullScreen
 gnome-terminal --title "Manuals/Readings" $fullScreen -- /bin/bash -c "$basic -s 'Manuals/Readings'"
-gnome-terminal --title "Launcher" $maximize
+#gnome-terminal --title "Launcher" $maximize
 
 #tmuxInside="$MY_VIM_LOADERS_DIR_BASE/tmux.inside.vim"
 #gnomeProject="$MY_PUBLIC_BASH_DIR/build_workspace_file_from_dir.sh && gnome-terminal --full-screen -- vim -S $tmuxInside"
