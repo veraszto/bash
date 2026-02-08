@@ -1,3 +1,34 @@
+
+userColors=(87 87)
+pwdColors=(225 213)
+rootColors=(161 161)
+twoColorsCounter=0
+
+bringColor() {
+    prefix="$1"
+    echo "${!prefix[$(($twoColorsCounter % 2))]}"
+}
+pepposo="\xF0\x9F\xA7\xB8"
+printBasic() {
+    index=$((twoColorsCounter % 2))
+    if [ $EUID -eq 0 ]; then
+        start="\e[38;5;${rootColors[$index]}m"
+    else
+        start="\e[38;5;${userColors[$index]}m"
+    fi
+    start2="\e[38;5;${pwdColors[$index]}m"
+    end="\e[0m"
+    ((twoColorsCounter++))
+    echo -e "$start$USER$end${pepposo}$start2$PWD$end"
+}
+
+PROMPT_COMMAND="printBasic"
+PS1="$ "
+
+return
+#############################################################################
+
+
 #clean_bash=${0#-}
 #clean_bash=${clean_bash##*/}
 
